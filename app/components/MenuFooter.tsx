@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, MessageCircle, Phone, Star } from "lucide-react";
+import { MapPin, MessageCircle, Phone } from "lucide-react";
 import type { Locale, Restaurant } from "@/lib/types";
 import { UI_LABELS } from "@/lib/i18n";
 
@@ -14,6 +14,8 @@ export function MenuFooter({ restaurant, locale }: Props) {
     : undefined;
   const telLink = contact.phone ? `tel:${contact.phone}` : undefined;
   const reviewLink = contact.googleReviewUrl?.trim();
+  const reviewLabel = contact.googleReviewLabel?.trim();
+  const showCustomButton = Boolean(reviewLink && reviewLabel);
 
   const tiles: { key: string; node: React.ReactNode }[] = [];
   if (waLink) {
@@ -91,7 +93,7 @@ export function MenuFooter({ restaurant, locale }: Props) {
           </div>
         )}
 
-        {reviewLink && (
+        {showCustomButton && (
           <a
             href={reviewLink}
             target="_blank"
@@ -99,8 +101,7 @@ export function MenuFooter({ restaurant, locale }: Props) {
             className="mt-3 flex items-center justify-center gap-2 rounded-2xl py-3 text-sm font-semibold text-white shadow-sm active:scale-95"
             style={{ backgroundColor: theme.accentColor }}
           >
-            <Star size={18} fill="currentColor" />
-            <span>⭐ {labels.googleReview}</span>
+            <span>{reviewLabel}</span>
           </a>
         )}
       </div>
