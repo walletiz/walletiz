@@ -87,17 +87,29 @@ export default function RestaurantPage() {
               />
             </Field>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <Field
-              label="Lien pour avis Google (optionnel)"
-              hint="Si renseigné, un bouton « Laisser un avis Google » apparaîtra dans votre menu client."
+              label="Texte"
+              hint="Texte affiché sur le bouton personnalisé en bas du menu client."
+            >
+              <Input
+                value={restaurant.contact.googleReviewLabel ?? ""}
+                onChange={(e) =>
+                  updateContact({ googleReviewLabel: e.target.value })
+                }
+                placeholder="Ex: Laissez-nous un avis"
+              />
+            </Field>
+            <Field
+              label="Lien"
+              hint="Où le bouton redirige (avis Google, réseau social, site web, etc.)."
             >
               <Input
                 value={restaurant.contact.googleReviewUrl ?? ""}
                 onChange={(e) =>
                   updateContact({ googleReviewUrl: e.target.value })
                 }
-                placeholder="https://g.page/r/.../review"
+                placeholder="https://..."
               />
             </Field>
           </div>
